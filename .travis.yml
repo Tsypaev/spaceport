@@ -20,13 +20,13 @@ jobs:
         - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
         - sudo apt-get update
         - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
-        - ./script/install-docker-compose.sh
+        - ./ets/scripts/install-docker-compose.sh
         - docker version
         - docker-compose version
         - docker ps -a
 
 before_install:
-  - ./script/install-docker-compose.sh
+  - ./ets/scripts/install-docker-compose.sh
   - docker version
   - docker-compose version
   - docker ps -a
