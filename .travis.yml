@@ -27,10 +27,7 @@ jobs:
         - docker ps -a
 
 before_install:
-  - ./etc/scripts/install-docker-compose.sh
-  - docker version
-  - docker-compose version
-  - docker ps -a
+  - docker-compose up
 
 script:
   - echo "Travis script"
