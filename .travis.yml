@@ -22,14 +22,9 @@ jobs:
         - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
         - chmod +x ./etc/scripts/install-docker-compose.sh
         - ./etc/scripts/install-docker-compose.sh
-        - docker version
-        - docker-compose version
-        - docker ps -a
-
-before_install:
-  - docker-compose up
-
+        
 script:
+  - docker-compose up
   - echo "Travis script"
 
 after_script:
