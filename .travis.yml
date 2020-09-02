@@ -24,8 +24,7 @@ jobs:
         - ./etc/scripts/install-docker-compose.sh
         
 script:
-  - docker-compose up
-  - echo "Travis script"
+  - docker-compose up -d
+  - ./etc/scripts/wait-gate-up.sh
+  - docker run --network=host -v /etc/propertis/gateway-client/application.properties:/etc/hercules vstk/hercules-gateway-client:0.38.0-SNAPSHOT
 
-after_script:
-  - echo "Travis after_script"
