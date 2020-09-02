@@ -4,8 +4,7 @@ TIMEOUT=10
 
 ATTEMPT=1
 while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
-  echo will try;
-  if nc -z localhost 6306; then
+  if [ "$(curl -sL -w '%{http_code}' http://localhost:6306/ping -o /dev/null)" = "200"]; then
       echo success;
       break;
   fi;
