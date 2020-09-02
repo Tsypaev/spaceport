@@ -6,7 +6,7 @@ EXPECTED_STREAMS='["logs","metrics","traces"]'
 ATTEMPT=1
 while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
   if [ "$(curl 'http://localhost:6307/rules/list' -H 'masterApiKey: 123' | jq length)" = "9" ]; then
-      echo success;
+      sleep 60;
       break;
   fi;
   echo "$ATTEMPT attempt failed."
