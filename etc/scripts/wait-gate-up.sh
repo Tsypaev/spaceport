@@ -1,10 +1,11 @@
 #!/usr/bin/env sh
 ATTEMPTS_MAX_COUNT=40
 TIMEOUT=10
+EXPECTED_STREAMS='["logs","metrics","traces"]'
 
 ATTEMPT=1
 while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
-  if [ "$(curl -sL -w '%{http_code}' http://localhost:6306/ping -o /dev/null)" = "200" ]; then
+  if [ "$(curl 'http://localhost:6307/rules/list' -H 'masterApiKey: 123' | jq length)" = "9" ]; then
       echo success;
       break;
   fi;
