@@ -24,11 +24,11 @@ jobs:
         - ./etc/scripts/install-docker-compose.sh
         
 script:
-  - docker-compose up -d
-  - chmod +x ./etc/scripts/wait-gate-up.sh
-  - ./etc/scripts/wait-gate-up.sh
+#  - docker-compose up -d
+#  - chmod +x ./etc/scripts/wait-gate-up.sh
+#  - ./etc/scripts/wait-gate-up.sh
   - ls
-  - cd /etc/properties/gateway-client
+  - cd etc/properties/gateway-client
   - ls
   - cat application.properties
   - docker run --network=host -v /etc/properties/gateway-client:/etc/hercules vstk/hercules-gateway-client:0.38.0-SNAPSHOT
