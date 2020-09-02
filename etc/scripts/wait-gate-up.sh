@@ -4,7 +4,9 @@ TIMEOUT=10
 
 ATTEMPT=1
 while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
+  echo will try;
   if nc -z localhost 6306; then
+      echo success;
       break;
   fi;
   echo "$ATTEMPT attempt failed."
