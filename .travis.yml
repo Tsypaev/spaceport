@@ -25,6 +25,7 @@ jobs:
         
 script:
   - docker-compose up -d
+  - chmod +x ./etc/scripts/wait-gate-up.sh
   - ./etc/scripts/wait-gate-up.sh
-  - docker run --network=host -v /etc/propertis/gateway-client/application.properties:/etc/hercules vstk/hercules-gateway-client:0.38.0-SNAPSHOT
+  - docker run --network=host -v ./etc/propertis/gateway-client/application.properties:/etc/hercules vstk/hercules-gateway-client:0.38.0-SNAPSHOT
 
