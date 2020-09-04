@@ -17,6 +17,7 @@ services:
   graphite:
     image: nickstenning/graphite:latest
     container_name: graphite
+    hostname: graphite
     ports:
       - 6304:80
       - 2003:2003
