@@ -42,43 +42,43 @@ docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/traces:/etc/
 
 docker-compose logs
 
-#ATTEMPTS_MAX_COUNT=5
-#TIMEOUT=20
-#ATTEMPT=1
-#while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
-#  echo "$(curl localhost:9200/test-index*/_count | jq .count)"
-#  if [ "$(curl localhost:9200/test-index*/_count | jq .count)" = "1" ]; then
-#      echo "$(curl localhost:9200/test-index*/_count | jq .count)"
-#      echo "Succes find log in Elasticsearch"
-#      break;
-#  fi;
-#  echo "$ATTEMPT attempt failed."
-#
-#  if [ "$ATTEMPT" -eq "$ATTEMPTS_MAX_COUNT" ]; then
-#      echo "Can't find log in Elastcsearch"
-#      exit 1;
-#  fi;
+ATTEMPTS_MAX_COUNT=5
+TIMEOUT=20
+ATTEMPT=1
+while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
+  echo "$(curl localhost:9200/test-index*/_count | jq .count)"
+  if [ "$(curl localhost:9200/test-index*/_count | jq .count)" = "1" ]; then
+      echo "$(curl localhost:9200/test-index*/_count | jq .count)"
+      echo "Succes find log in Elasticsearch"
+      break;
+  fi;
+  echo "$ATTEMPT attempt failed."
 
-#  ATTEMPT=$(($ATTEMPT+1))
-#  sleep $TIMEOUT;
-#done
+  if [ "$ATTEMPT" -eq "$ATTEMPTS_MAX_COUNT" ]; then
+      echo "Can't find log in Elastcsearch"
+      exit 1;
+  fi;
 
-#ATTEMPTS_MAX_COUNT=5
-#TIMEOUT=10
-#ATTEMPT=1
-#while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
-#  if [ "$(curl localhost:6304/metrics/find?query=TestValue* | jq .[0].leaf)" = "1" ]; then
-#      echo "Succes find metric in Graphite"
-#      break;
-#  fi;
-#  echo "$ATTEMPT attempt failed."
+  ATTEMPT=$(($ATTEMPT+1))
+  sleep $TIMEOUT;
+done
 
-#  if [ "$ATTEMPT" -eq "$ATTEMPTS_MAX_COUNT" ]; then
-#      echo "Can't find metric in Graphite"
-#      exit 1;
-#  fi;
+ATTEMPTS_MAX_COUNT=5
+TIMEOUT=10
+ATTEMPT=1
+while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
+  if [ "$(curl localhost:6304/metrics/find?query=TestValue* | jq .[0].leaf)" = "1" ]; then
+      echo "Succes find metric in Graphite"
+      break;
+  fi;
+  echo "$ATTEMPT attempt failed."
 
-#  ATTEMPT=$(($ATTEMPT+1))
-#  sleep $TIMEOUT;
-#done
+  if [ "$ATTEMPT" -eq "$ATTEMPTS_MAX_COUNT" ]; then
+      echo "Can't find metric in Graphite"
+      exit 1;
+  fi;
+
+  ATTEMPT=$(($ATTEMPT+1))
+  sleep $TIMEOUT;
+done
 
