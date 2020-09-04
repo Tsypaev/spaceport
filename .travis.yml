@@ -27,7 +27,4 @@ script:
   - docker-compose up -d
   - chmod +x ./etc/scripts/wait-gate-up.sh
   - ./etc/scripts/wait-gate-up.sh
-  - docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/logs:/etc/hercules" vstk/hercules-gateway-client:0.38.0-SNAPSHOT
-  - docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/metrics:/etc/hercules" vstk/hercules-gateway-client:0.38.0-SNAPSHOT
-  - docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/traces:/etc/hercules" vstk/hercules-gateway-client:0.38.0-SNAPSHOT
 

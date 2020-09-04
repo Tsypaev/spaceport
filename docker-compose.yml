@@ -218,6 +218,20 @@ services:
       - ./etc/properties/tracing-api:/etc/hercules
     entrypoint: ["sh", "/scripts/wait_init_success.sh"]
 
+  # API for getting events from Kafka stream
+  stream-api:
+    image: vstk/hercules-stream-api:${VERSION}
+    container_name: stream-api
+    ports:
+      - 6309:6309
+    depends_on:
+      - tracing-sink
+    volumes:
+      - ./etc/init/results:/init/results
+      - ./etc/scripts:/scripts
+      - ./etc/properties/stream-api:/etc/hercules
+    entrypoint: ["sh", "/scripts/wait_init_success.sh"]
+
 volumes:
   esdata:
     driver: local
