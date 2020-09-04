@@ -1,4 +1,4 @@
-i#!/usr/bin/env sh
+#!/usr/bin/env sh
 ATTEMPTS_MAX_COUNT=5
 TIMEOUT=30
 ATTEMPT=1
@@ -43,26 +43,26 @@ docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/traces:/etc/
 
 docker-compose logs curl
 
-ATTEMPTS_MAX_COUNT=5
-TIMEOUT=20
-ATTEMPT=1
-while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
-  echo "$(curl localhost:9200/test-index*/_count | jq .count)"
-  if [ "$(curl localhost:9200/test-index*/_count | jq .count)" = "1" ]; then
-      echo "$(curl localhost:9200/test-index*/_count | jq .count)"
-      echo "Succes find log in Elasticsearch"
-      break;
-  fi;
-  echo "$ATTEMPT attempt failed."
+#ATTEMPTS_MAX_COUNT=5
+#TIMEOUT=20
+#ATTEMPT=1
+#while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
+#  echo "$(curl localhost:9200/test-index*/_count | jq .count)"
+#  if [ "$(curl localhost:9200/test-index*/_count | jq .count)" = "1" ]; then
+#      echo "$(curl localhost:9200/test-index*/_count | jq .count)"
+#      echo "Succes find log in Elasticsearch"
+#      break;
+#  fi;
+#  echo "$ATTEMPT attempt failed."
+#
+#  if [ "$ATTEMPT" -eq "$ATTEMPTS_MAX_COUNT" ]; then
+#      echo "Can't find log in Elastcsearch"
+#      exit 1;
+#  fi;
 
-  if [ "$ATTEMPT" -eq "$ATTEMPTS_MAX_COUNT" ]; then
-      echo "Can't find log in Elastcsearch"
-      exit 1;
-  fi;
-
-  ATTEMPT=$(($ATTEMPT+1))
-  sleep $TIMEOUT;
-done
+#  ATTEMPT=$(($ATTEMPT+1))
+#  sleep $TIMEOUT;
+#done
 
 ATTEMPTS_MAX_COUNT=5
 TIMEOUT=10
