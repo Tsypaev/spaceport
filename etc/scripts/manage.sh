@@ -5,6 +5,7 @@ TIMEOUT=10
 ATTEMPT=1
 while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
   if nc -z management-api 6307; then
+      sleep $TIMEOUT;
       break;
   fi;
   echo "$ATTEMPT attempt failed."
