@@ -10,7 +10,26 @@ while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
   echo "$ATTEMPT attempt failed."
 
   if [ "$ATTEMPT" -eq "$ATTEMPTS_MAX_COUNT" ]; then
-      echo "Can't ping gate!"
+      echo "Can't get rules!"
+      exit 1;
+  fi;
+
+  ATTEMPT=$(($ATTEMPT+1))
+  sleep $TIMEOUT;
+done
+
+ATTEMPTS_MAX_COUNT=5
+TIMEOUT=30
+ATTEMPT=1
+while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
+  if [ "$(curl 'http://localhost:6307/streams/list' -H 'masterApiKey: 123' | jq length)" = "3" ]; then
+      sleep 2m;
+      break;
+  fi;
+  echo "$ATTEMPT attempt failed."
+
+  if [ "$ATTEMPT" -eq "$ATTEMPTS_MAX_COUNT" ]; then
+      echo "Can't get streams!"
       exit 1;
   fi;
 
@@ -22,11 +41,7 @@ docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/logs:/etc/he
 docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/metrics:/etc/hercules" vstk/hercules-gateway-client:0.38.0-SNAPSHOT
 docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/traces:/etc/hercules" vstk/hercules-gateway-client:0.38.0-SNAPSHOT
 
-sleep 1m
-
-docker-compose logs elastic-sink
-docker-compose logs tracing-sink
-docker-compose logs graphite-sink
+docker-compose logs curl
 
 ATTEMPTS_MAX_COUNT=5
 TIMEOUT=20
