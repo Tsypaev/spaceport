@@ -40,3 +40,23 @@ while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
   ATTEMPT=$(($ATTEMPT+1))
   sleep $TIMEOUT;
 done
+
+ATTEMPTS_MAX_COUNT=5
+TIMEOUT=10
+ATTEMPT=1
+while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
+  if [ "$(curl localhost:6304/metrics/find?query=TestValue | jq .[0].leaf)" = "1" ]; then
+      echo "Succes find metric in Graphite"
+      break;
+  fi;
+  echo "$ATTEMPT attempt failed."
+
+  if [ "$ATTEMPT" -eq "$ATTEMPTS_MAX_COUNT" ]; then
+      echo "Can't find metric in Graphite"
+      exit 1;
+  fi;
+
+  ATTEMPT=$(($ATTEMPT+1))
+  sleep $TIMEOUT;
+done
+
