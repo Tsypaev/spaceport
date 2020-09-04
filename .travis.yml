@@ -1,9 +1,9 @@
 language: ruby
 
-dist: xenial
+#dist: xenial
 
-env:
-  - DOCKER_COMPOSE_VERSION=1.25.5
+#env:
+#  - DOCKER_COMPOSE_VERSION=1.25.5
 
 services:
   - docker
@@ -22,6 +22,7 @@ jobs:
         - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
         - chmod +x ./etc/scripts/install-docker-compose.sh
         - ./etc/scripts/install-docker-compose.sh
+        - 
         
 script:
   - docker-compose up -d

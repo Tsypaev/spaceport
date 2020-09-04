@@ -40,15 +40,11 @@ docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/logs:/etc/he
 docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/metrics:/etc/hercules" vstk/hercules-gateway-client:0.38.0-SNAPSHOT
 docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/traces:/etc/hercules" vstk/hercules-gateway-client:0.38.0-SNAPSHOT
 
-docker-compose logs
-
 ATTEMPTS_MAX_COUNT=5
-TIMEOUT=20
+TIMEOUT=10
 ATTEMPT=1
 while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
-  echo "$(curl localhost:9200/test-index*/_count | jq .count)"
   if [ "$(curl localhost:9200/test-index*/_count | jq .count)" = "1" ]; then
-      echo "$(curl localhost:9200/test-index*/_count | jq .count)"
       echo "Succes find log in Elasticsearch"
       break;
   fi;
