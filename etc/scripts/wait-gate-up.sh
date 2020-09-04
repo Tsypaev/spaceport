@@ -22,6 +22,12 @@ docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/logs:/etc/he
 docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/metrics:/etc/hercules" vstk/hercules-gateway-client:0.38.0-SNAPSHOT
 docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/traces:/etc/hercules" vstk/hercules-gateway-client:0.38.0-SNAPSHOT
 
+sleep 1m
+
+docker-compose logs elastic-sink
+docker-compose logs tracing-sink
+docker-compose logs graphite-sink
+
 ATTEMPTS_MAX_COUNT=5
 TIMEOUT=20
 ATTEMPT=1
