@@ -27,6 +27,7 @@ TIMEOUT=20
 ATTEMPT=1
 while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
   if [ "$(curl localhost:9200/test-index*/_count | jq .count)" = "1" ]; then
+      echo "$(curl localhost:9200/test-index*/_count | jq .count)"
       echo "Succes find log in Elasticsearch"
       break;
   fi;
