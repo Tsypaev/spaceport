@@ -22,7 +22,6 @@ TIMEOUT=30
 ATTEMPT=1
 while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
   if [ "$(curl 'http://localhost:6307/streams/list' -H 'masterApiKey: 123' | jq length)" = "3" ]; then
-      sleep 2m;
       break;
   fi;
   echo "$ATTEMPT attempt failed."
@@ -40,6 +39,7 @@ docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/logs:/etc/he
 docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/metrics:/etc/hercules" vstk/hercules-gateway-client:0.38.0-SNAPSHOT
 docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/traces:/etc/hercules" vstk/hercules-gateway-client:0.38.0-SNAPSHOT
 
+sleep 1m
 #docker-compose logs
 
 ATTEMPTS_MAX_COUNT=5
@@ -76,7 +76,8 @@ while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
       echo "Can't find metric in Graphite"
       exit 1;
   fi;
-
+  
+  curl localhost:6304/metrics/find?query=TestValue*
   ATTEMPT=$(($ATTEMPT+1))
   sleep $TIMEOUT;
 done
