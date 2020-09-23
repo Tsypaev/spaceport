@@ -40,7 +40,7 @@ docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/logs:/etc/he
 docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/metrics:/etc/hercules" vstk/hercules-gateway-client:0.38.0-SNAPSHOT
 docker run --network=host -v "/$(pwd)/etc/properties/gateway-client/traces:/etc/hercules" vstk/hercules-gateway-client:0.38.0-SNAPSHOT
 
-docker-compose logs
+#docker-compose logs
 
 ATTEMPTS_MAX_COUNT=5
 TIMEOUT=10
