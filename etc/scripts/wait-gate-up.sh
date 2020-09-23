@@ -57,7 +57,8 @@ while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
       exit 1;
   fi;
 
-  ATTEMPT=$(($ATTEMPT+1))
+  curl localhost:9200/test-index*/_count | jq .count
+  ATTEMPT=$(($ATTEMPT+1));
   sleep $TIMEOUT;
 done
 
