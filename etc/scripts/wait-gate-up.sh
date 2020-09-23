@@ -22,6 +22,7 @@ TIMEOUT=30
 ATTEMPT=1
 while [ "$ATTEMPT" -le "$ATTEMPTS_MAX_COUNT" ]; do
   if [ "$(curl 'http://localhost:6307/streams/list' -H 'masterApiKey: 123' | jq length)" = "3" ]; then
+      sleep 1m;
       break;
   fi;
   echo "$ATTEMPT attempt failed."
